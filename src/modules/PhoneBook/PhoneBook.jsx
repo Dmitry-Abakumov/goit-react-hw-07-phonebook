@@ -16,7 +16,7 @@ const PhoneBook = () => {
   }, [dispatch]);
 
   return (
-    <Box textAlign="center" as="section">
+    <Box textAlign="center" pt={15} pl={15} pr={15} pb={15} as="section">
       <h2>Phonebook</h2>
       <PhoneBookForm />
       <Box
