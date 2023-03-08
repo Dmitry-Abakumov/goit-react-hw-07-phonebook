@@ -11,3 +11,5 @@ export const getFilteredContacts = ({ filter, contacts: { items } }) => {
 };
 
 export const getIsLoading = ({ contacts: { isLoading } }) => isLoading;
+
+export const getError = ({ contacts: { error } }) => error;

@@ -11,7 +11,7 @@ const handlePending = store => {
 };
 
 const handleRejected = (store, { payload }) => {
-  store.isLoading = true;
+  store.isLoading = false;
   if (payload) store.error = payload;
 };
 
@@ -28,7 +28,7 @@ const contactsSlice = createSlice({
       .addCase(fetchAddContact.fulfilled, (store, { payload }) => {
         store.items.push(payload);
         store.isLoading = false;
-        store.error = null
+        store.error = null;
       })
       .addCase(fetchAddContact.rejected, handleRejected)
 
@@ -43,7 +43,7 @@ const contactsSlice = createSlice({
       .addCase(fetchAllContacts.fulfilled, (store, { payload }) => {
         store.isLoading = false;
         store.items = payload;
-        store.error = null
+        store.error = null;
       })
       .addCase(fetchAllContacts.rejected, handleRejected);
   },
