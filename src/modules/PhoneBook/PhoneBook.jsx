@@ -1,22 +1,15 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
 import PhoneBookForm from './PhoneBookForm/PhoneBookForm';
 import ContactList from './ContactList/ContactList';
 import PhoneBookFilter from './PhoneBookFilter/PhoneBookFilter';
 import Box from 'shared/components/Box/Box';
 
-import { getError, getIsLoading } from 'redux/contacts/contacts-selectors';
 import { fetchAllContacts } from 'redux/contacts/contacts-operations';
-
-import 'react-toastify/dist/ReactToastify.css';
 
 const PhoneBook = () => {
   const dispatch = useDispatch();
-
-  const isError = useSelector(getError);
-  const isLoading = useSelector(getIsLoading);
 
   useEffect(() => {
     dispatch(fetchAllContacts());
@@ -36,12 +29,6 @@ const PhoneBook = () => {
       >
         <PhoneBookFilter />
         <ContactList />
-
-        {isError &&
-          !isLoading &&
-          toast.error('Oops, something went wrong, please reload the page', {
-            position: toast.POSITION.TOP_RIGHT,
-          })}
       </Box>
     </Box>
   );

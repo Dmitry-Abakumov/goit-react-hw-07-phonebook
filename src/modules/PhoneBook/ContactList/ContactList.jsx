@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { TailSpin } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
 import ContactListItem from '../ContsctListItem/ContactListItem';
 import Box from 'shared/components/Box/Box';
@@ -8,14 +9,18 @@ import {
   getFilteredContacts,
   getContacts,
   getIsLoading,
+  getError,
 } from 'redux/contacts/contacts-selectors';
 import { getFilter } from 'redux/filter/filter-selectors';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactList = () => {
   const filteredContacts = useSelector(getFilteredContacts);
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
   const isLoading = useSelector(getIsLoading);
+  const isError = useSelector(getError);
 
   return (
     <>
@@ -48,6 +53,12 @@ const ContactList = () => {
       )}
 
       {Boolean(filter && !filteredContacts.length) && <p>No matches found</p>}
+
+      {isError &&
+        !isLoading &&
+        toast.error('Oops, something went wrong, please reload the page', {
+          position: toast.POSITION.TOP_RIGHT,
+        })}
     </>
   );
 };
